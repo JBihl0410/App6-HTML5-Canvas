@@ -26,191 +26,78 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 -->
 	
    <head> 
-      <title>App6---HTML5-Canvas</title>  
-      <!-- Mobile scaling -->
+       <title>Canvas App - J. Bihl</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Allows app-like behavior on iPhone -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-
-    <!-- External styling -->
     <link rel="stylesheet" href="w3.css">
-    <link rel="stylesheet" href="w3-colors-flat.css">
-</head> 
 
+    <style>
+        body {
+            text-align: center;
+        }
 
-<script>
-/*
-===============================================================================
-LAST MODIFIED TRACKER
-Displays when the file was last updated
-===============================================================================
-*/
-var docMod = document.lastModified;
-alert("This file last modified " + docMod);
-console.log("This file last modified " + docMod);
-</script>
-
-
-
-<style>	
-/*
-===============================================================================
-GENERAL PAGE STYLING
-===============================================================================
-*/
-body {
-    margin: 0em;
-    text-align: center; /* centers content */
-}
-
-/*
-===============================================================================
-CANVAS STYLING
-- Adds a visible border so user can see drawing area
-===============================================================================
-*/
-#myCanvas {
-    border: 2px solid black;
-    margin-top: 20px;
-}
-</style>
+        /* Canvas box */
+        #myCanvas {
+            border: 2px solid black;
+            margin-top: 20px;
+        }
+    </style>
+</head>
 
 <body>
 
-<!-- HEADER -->
-<div class="w3-container w3-flat-carrot">
-    <h1>Canvas Drawing App</h1>
-</div>
+    <!-- Title -->
+    <div class="w3-container w3-blue">
+        <h2>My Canvas App</h2>
+    </div>
 
-<!-- MAIN CONTENT -->
-<div class="w3-container">
+    <p>Click the buttons to draw!</p>
 
-    <p>Use the buttons below to draw on the canvas!</p>
-
-    <!-- 
-    ===========================================================================
-    CANVAS ELEMENT
-    - This is where all drawings will appear
-    - width/height adjusted to fit phone screens
-    ===========================================================================
-    -->
+    <!-- Canvas -->
     <canvas id="myCanvas" width="300" height="300"></canvas>
 
     <br><br>
 
-    <!-- 
-    ===========================================================================
-    BUTTONS
-    Each button calls a JavaScript function when clicked
-    ===========================================================================
-    -->
+    <!-- Buttons -->
+    <button onclick="drawRectangle()">Rectangle</button>
+    <button onclick="drawName()">Name</button>
+    <button onclick="drawImage()">Image</button>
+    <button onclick="clearCanvas()">Clear</button>
 
-    <button onclick="drawRectangle()" class="w3-button w3-blue">
-        Draw Rectangle
-    </button>
+    <script>
+        // get canvas
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
 
-    <button onclick="drawName()" class="w3-button w3-green">
-        Draw Name
-    </button>
+        // draw rectangle
+        function drawRectangle() {
+            ctx.fillStyle = "Dark Green";
+            ctx.fillRect(50, 50, 150, 100);
+        }
 
-    <button onclick="drawImage()" class="w3-button w3-purple">
-        Load Image
-    </button>
+        // write name
+        function drawName() {
+            ctx.font = "20px Arial";
+            ctx.fillStyle = "black";
+            ctx.fillText("Jayden I. Bihl", 80, 200);
+        }
 
-    <button onclick="clearCanvas()" class="w3-button w3-red">
-        Clear Canvas
-    </button>
+        // draw image
+        function drawImage() {
+            var img = new Image();
+            img.src = "https://via.placeholder.com/150";
 
-</div>
+            img.onload = function () {
+                ctx.drawImage(img, 75, 75, 150, 150);
+            };
+        }
 
-<footer class="w3-bottom w3-container w3-flat-carrot">
-    <p>DIY!</p>
-</footer>
-
-<script>
-/*
-===============================================================================
-CANVAS SETUP
-- Get canvas element
-- Get drawing context (2D)
-===============================================================================
-*/
-var canvas = document.getElementById("myCanvas");
-var ctx = canvas.getContext("2d");
-
-
-/*
-===============================================================================
-FUNCTION: drawRectangle()
-PURPOSE: Draws a blue rectangle onto the canvas
-===============================================================================
-*/
-function drawRectangle() {
-
-    // Set fill color
-    ctx.fillStyle = "blue";
-
-    // Draw rectangle (x, y, width, height)
-    ctx.fillRect(50, 50, 200, 100);
-}
-
-
-/*
-===============================================================================
-FUNCTION: drawName()
-PURPOSE: Writes your name on the canvas
-===============================================================================
-*/
-function drawName() {
-
-    // Set font style and size
-    ctx.font = "20px Arial";
-
-    // Set text color
-    ctx.fillStyle = "black";
-
-    // Draw text (text, x, y)
-    ctx.fillText("Your Name Here", 70, 200);
-}
-
-
-/*
-===============================================================================
-FUNCTION: drawImage()
-PURPOSE: Loads and displays an image on the canvas
-NOTE:
-- Image must be hosted online or in same repo
-===============================================================================
-*/
-function drawImage() {
-
-    // Create new image object
-    var img = new Image();
-
-    // Image source (replace with your own image if desired)
-    img.src = "https://via.placeholder.com/150";
-
-    // Draw image AFTER it loads
-    img.onload = function() {
-        ctx.drawImage(img, 75, 75, 150, 150);
-    };
-}
-
-
-/*
-===============================================================================
-FUNCTION: clearCanvas()
-PURPOSE: Clears everything from the canvas
-===============================================================================
-*/
-function clearCanvas() {
-
-    // Clears entire canvas area
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-</script>
+        // clear canvas
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
 
 </body>
 </html>
